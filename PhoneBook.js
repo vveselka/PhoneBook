@@ -1,6 +1,7 @@
 var React = require('react');
 var Contact = require('./Contact');
 var Form = require('./Form');
+var Header = require('./Header');
 
 var PhoneBook = React.createClass({
   propTypes: {
@@ -10,7 +11,9 @@ var PhoneBook = React.createClass({
     return {
         contacts: this.props.contacts,
         showForm: false,
-        search: ''
+        search: '',
+        sortingColumn: null,
+        sortType: 'none',
     };
   },
   render() {
@@ -23,7 +26,15 @@ var PhoneBook = React.createClass({
       });
     }
     allContacts = allContacts.map(function(element, index) {
-      return <Contact key={index} name={element.name} phone={element.phone_number} address={element.address} id={index} removeContact={this.removeContact} updateContact={this.updateContact}/>
+      return <Contact
+        key={index}
+        name={element.name}
+        phone={element.phone_number}
+        address={element.address}
+        id={index}
+        removeContact={this.removeContact}
+        updateContact={this.updateContact}
+      />;
     }.bind(this));
     return <div>
       <div className="addNewContact" onClick={this.handleShowForm}>Add New</div>
@@ -31,9 +42,49 @@ var PhoneBook = React.createClass({
       <div className="orderByName" onClick={this.orderContactsByName} >Order by Name</div>
       {this.state.showForm ? <Form addContact={this.addContact} closeForm={this.closeForm} /> : null}
       <div className='allContacts'>
+        <div>
+          <Header sortType={this.getSortType('name')} className="col-sm-3" title='Name' onClick={this.handleHeaderClick.bind(this, 'name')}/>
+          <Header sortType={this.getSortType('phone')} className="col-sm-2" title='Phone' onClick={this.handleHeaderClick.bind(this, 'phone')}/>
+          <Header sortType={this.getSortType('address')} className="col-sm-5" title='Address' onClick={this.handleHeaderClick.bind(this, 'address')} />
+          <Header className="col-sm-2" title='Actions'/>
+        </div>
         {allContacts}
       </div>
-    </div>
+    </div>;
+  },
+  getSortType(column) {
+    return this.state.sortingColumn === column ? this.state.sortType : 'none';
+  },
+  handleHeaderClick(column) {
+    var sortType;
+    if (this.state.sortingColumn !== column) {
+      sortType = 'asc';
+    } else {
+      if(this.state.sortType === 'none') {
+        sortType = 'asc';
+      } else if(this.state.sortType === 'asc') {
+        sortType = 'desc';
+      } else if(this.state.sortType === 'desc') {
+        sortType = 'asc';
+      }
+    }
+    this.setState({
+      sortingColumn: column,
+      sortType: sortType,
+    });
+    var sortedContacts = this.state.contacts.slice();
+    sortedContacts.sort(function(a,b) {
+      var result = 0;
+      if (a[column] > b[column]) {
+        result = 1;
+      } else if(a[column] < b[column]) {
+        result = -1;
+      }
+      return sortType === 'asc' ? result : -result;
+    });
+    this.setState({
+      contacts: sortedContacts,
+    });
   },
   handleShowForm() {
     this.setState({
