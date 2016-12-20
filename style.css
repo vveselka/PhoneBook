@@ -1,0 +1,114 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.contact {
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+.contactName {
+  font-size: 25px;
+}
+
+.addNewContact {
+    width: 104px;
+    height: 26px;
+    border: 2px solid #AEB6BF;
+    font-size: 16px;
+    text-align: center;
+    margin: 0 20px 20px 20px;
+    display: inline-block;
+    vertical-align: top;
+    color: #34495E;
+    background-color: #AEB6BF;
+    font-weight: bold;
+    transition: background-color 0.5s;
+}
+
+.addNewContact:hover {
+  cursor: pointer;
+  background-color: #D6DBDF;
+}
+
+.contact:nth-of-type(even){
+  background: #F2F4F4;
+}
+
+.removeContact {
+  font-size: 14px;
+  float: left;
+}
+
+.removeContact:hover {
+  cursor: pointer;
+}
+
+.searchInput {
+  display: inline-block;
+  vertical-align: top;
+  border-color: #AEB6BF;
+  background-color: #EBEDEF;
+  color: #34495E;
+}
+
+.orderByName {
+    vertical-align: top;
+    width: 137px;
+    height: 26px;
+    border: 2px solid #AEB6BF;
+    font-size: 16px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    color: #34495E;
+    background-color: #AEB6BF;
+    font-weight: bold;
+    float: right;
+    transition: background-color 0.5s;
+}
+.orderByName:hover {
+  cursor: pointer;
+  background-color: #D6DBDF;
+}
+
+.contact {
+  font-size: 16px;
+}
+
+.editContact {
+  float: right;
+  font-size: 14px;
+}
+.editContact:hover {
+    cursor: pointer;
+}
+
+.saveContact {
+  float: right;
+  font-size: 14px;
+}
+
+.cancelUpdating {
+  float: left;
+  font-size: 14px;
+}
+
+.error
+{
+  background-color: #F2D7D5;
+}
+
+input:focus {
+  outline:0;
+}
+
+input {
+  border-style: solid 1 px;
+}
+
+.header {
+  display: inline-block;
+}
