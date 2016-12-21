@@ -2,12 +2,13 @@ var React = require('react');
 
 var Contact = React.createClass({
   propTypes: {
-    name: React.PropTypes.string,
-    phone: React.PropTypes.string,
-    address: React.PropTypes.string,
+    name: React.PropTypes.string.isRequired,
+    phone: React.PropTypes.string.isRequired,
+    address: React.PropTypes.string.isRequired,
     id: React.PropTypes.number.isRequired,
     removeContact: React.PropTypes.func.isRequired,
     updateContact: React.PropTypes.func.isRequired,
+    className: React.PropTypes.string,
   },
   getInitialState() {
     return {
@@ -26,7 +27,7 @@ var Contact = React.createClass({
   render() {
     var error = this.state.error ? ' error' : '';
     if(!this.state.mode) {
-        return <div className='row contact'>
+        return <div className={'row contact ' + this.props.className}>
           <div className="col-sm-3">
             <div className="col-sm-12">{this.props.name}</div>
           </div>
@@ -55,10 +56,10 @@ var Contact = React.createClass({
           <input className={'col-sm-12' + error} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.address} name='address'></input>
         </div>
         <div className="col-sm-2 actionsColumn">
-          <span className="saveContact manageContactLeft" onClick={this.updateContact.bind(this, this.props.id)}>
+          <span className="saveContact" onClick={this.updateContact.bind(this, this.props.id)}>
             Save
           </span>
-          <span className="cancelUpdating manageContactRight" onClick={this.cancelEditing}>
+          <span className="cancelUpdating" onClick={this.cancelEditing}>
             Cancel
           </span>
         </div>

@@ -46,10 +46,12 @@
 .removeContact {
   font-size: 14px;
   float: left;
+  transition: color 0.5s;
 }
 
 .removeContact:hover {
   cursor: pointer;
+  color: #E35641;
 }
 
 .searchInput {
@@ -89,9 +91,11 @@
 .editContact {
   float: right;
   font-size: 14px;
+  transition: color 0.5s;
 }
 .editContact:hover {
     cursor: pointer;
+    color: #45795E;
 }
 
 .saveContact {
@@ -130,7 +134,8 @@ input {
 .header:hover {
   cursor: pointer;
 }
-.actionHeader:hover {
+
+.noSort:hover {
   cursor: default;
 }
 
@@ -173,4 +178,14 @@ input {
 .icon {
   font-size: 15px;
   opacity: 0.6;
+}
+
+
+@keyframes newItemAnimation {
+  0% {  background-color: #45795E; }
+  100% { background-color: #EBEDEF; }
+}
+
+.addedContact {
+    animation: newItemAnimation 3s;
 }
