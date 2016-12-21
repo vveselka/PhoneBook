@@ -4,11 +4,6 @@
           box-sizing: border-box;
 }
 
-.contact {
-  margin-bottom: 5px;
-  margin-left: 5px;
-}
-
 .contactName {
   font-size: 25px;
 }
@@ -33,9 +28,15 @@
   background-color: #D6DBDF;
 }
 
+
 .contact:nth-of-type(even){
-  background: #F2F4F4;
+  background: #EBEDEF;
 }
+
+.contact:nth-of-type(odd){
+  background: #F4F6F6;
+}
+
 
 .removeContact {
   font-size: 14px;
@@ -76,6 +77,7 @@
 
 .contact {
   font-size: 16px;
+  padding: 2px;
 }
 
 .editContact {
@@ -106,28 +108,30 @@ input:focus {
 }
 
 input {
-  border: 2px solid #F2F4F4;
+  border: 2px solid #D5DBDB;
 }
 
 .header {
     display: inline-block;
     font-size: 18px;
     padding: 10px 10px 10px 15px;
-    background-color: #BEBECA;
+    background-color: #AEB6BF;
     font-size: 19px;
     font-weight: 600;
-    margin-bottom: 4px;
+    color: #34495E;
 }
 
 
-form {
+.addNewContactForm {
   opacity: 0;
 }
 
-form.fade {
+.addNewContactForm.fade {
   -webkit-animation: fade 5s;
   animation: fade 2s;
   opacity: 1;
+  padding: 5px 0 10px 0;
+  background-color: #EBEDEF;
 }
 
 @-webkit-keyframes fade {

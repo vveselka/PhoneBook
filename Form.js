@@ -13,7 +13,7 @@ var Form = React.createClass({
     }
   },
   render() {
-    return <form className="fade">
+    return <div className="addNewContactForm fade row">
       <div className="col-sm-3">
         <input className="col-sm-12" type='text' name='name' onChange={this.handleInput} onKeyDown={this.handleSaveKeyDown} value={this.state.name} autoFocus={true}></input>
       </div>
@@ -31,7 +31,7 @@ var Form = React.createClass({
           Cancel
         </span>
       </div>
-    </form>
+    </div>
   },
   handleInput(e) {
     this.setState({

@@ -39,7 +39,6 @@ var PhoneBook = React.createClass({
     return <div>
       <div className="addNewContact" onClick={this.handleShowForm}>Add New</div>
       <input className='searchInput' type='text' value={this.state.search} onChange={this.handleSearch}></input>
-      <div className="orderByName" onClick={this.orderContactsByName} >Order by Name</div>
       <div className='allContacts'>
         <div className="row headers">
           <Header sortType={this.getSortType('name')} className="col-sm-3" title='Name' onClick={this.handleHeaderClick.bind(this, 'name')}/>
