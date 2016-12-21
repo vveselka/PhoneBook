@@ -40,14 +40,14 @@ var PhoneBook = React.createClass({
       <div className="addNewContact" onClick={this.handleShowForm}>Add New</div>
       <input className='searchInput' type='text' value={this.state.search} onChange={this.handleSearch}></input>
       <div className="orderByName" onClick={this.orderContactsByName} >Order by Name</div>
-      {this.state.showForm ? <Form addContact={this.addContact} closeForm={this.closeForm} /> : null}
       <div className='allContacts'>
-        <div>
+        <div className="row headers">
           <Header sortType={this.getSortType('name')} className="col-sm-3" title='Name' onClick={this.handleHeaderClick.bind(this, 'name')}/>
           <Header sortType={this.getSortType('phone')} className="col-sm-2" title='Phone' onClick={this.handleHeaderClick.bind(this, 'phone')}/>
           <Header sortType={this.getSortType('address')} className="col-sm-5" title='Address' onClick={this.handleHeaderClick.bind(this, 'address')} />
           <Header className="col-sm-2" title='Actions'/>
         </div>
+        {this.state.showForm ? <Form addContact={this.addContact} closeForm={this.closeForm} /> : null}
         {allContacts}
       </div>
     </div>;

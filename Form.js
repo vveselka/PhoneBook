@@ -13,7 +13,7 @@ var Form = React.createClass({
     }
   },
   render() {
-    return <form>
+    return <form className="fade">
       <div className="col-sm-3">
         <input className="col-sm-12" type='text' name='name' onChange={this.handleInput} onKeyDown={this.handleSaveKeyDown} value={this.state.name} autoFocus={true}></input>
       </div>

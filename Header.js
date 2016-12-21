@@ -7,17 +7,15 @@ var Header = React.createClass({
     onClick: React.PropTypes.func,
   },
   render() {
-    var sort;
+    var sortClass;
     if(this.props.sortType === 'asc') {
-      sort = '^';
+      sortClass = 'glyphicon glyphicon-sort-by-attributes';
     } else if(this.props.sortType === 'desc') {
-      sort = '?';
+      sortClass = 'glyphicon glyphicon-sort-by-attributes-alt';
     }
     return <div className={this.props.className + ' header'} onClick={this.props.onClick}>
       {this.props.title}
-      <span>
-        {sort}
-      </span>
+      <span className={sortClass + ' icon'}></span>
     </div>
   },
 })

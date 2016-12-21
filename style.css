@@ -106,9 +106,45 @@ input:focus {
 }
 
 input {
-  border-style: solid 1 px;
+  border: 2px solid #F2F4F4;
 }
 
 .header {
-  display: inline-block;
+    display: inline-block;
+    font-size: 18px;
+    padding: 10px 10px 10px 15px;
+    background-color: #BEBECA;
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 4px;
 }
+
+
+form {
+  opacity: 0;
+}
+
+form.fade {
+  -webkit-animation: fade 5s;
+  animation: fade 2s;
+  opacity: 1;
+}
+
+@-webkit-keyframes fade {
+    from {
+      opacity: 0;
+      background-color: white;
+    }
+    to {
+      opacity: 1;
+      background-color: #777;
+    }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
