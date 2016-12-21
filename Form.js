@@ -10,24 +10,26 @@ var Form = React.createClass({
       name: '',
       phone: '',
       address: '',
+      error: 0,
     }
   },
   render() {
+    var classValue = this.state.error ? 'col-sm-12 error' : 'col-sm-12';
     return <div className="addNewContactForm fade row">
       <div className="col-sm-3">
-        <input className="col-sm-12" type='text' name='name' onChange={this.handleInput} onKeyDown={this.handleSaveKeyDown} value={this.state.name} autoFocus={true}></input>
+        <input className={classValue} type='text' name='name' onChange={this.handleInput} onKeyDown={this.handleSaveKeyDown} value={this.state.name} autoFocus={true}></input>
       </div>
       <div className="col-sm-2">
-        <input className="col-sm-12" type='text' name='phone' onChange={this.handleInput} onKeyDown={this.handleSaveKeyDown} value={this.state.phone}></input>
+        <input className={classValue} type='text' name='phone' onChange={this.handleInput} onKeyDown={this.handleSaveKeyDown} value={this.state.phone}></input>
       </div>
       <div className="col-sm-5">
-        <input className="col-sm-12" type='text' name='address' onChange={this.handleInput} onKeyDown={this.handleSaveKeyDown} value={this.state.address}></input>
+        <input className={classValue} type='text' name='address' onChange={this.handleInput} onKeyDown={this.handleSaveKeyDown} value={this.state.address}></input>
       </div>
       <div className="col-sm-2">
-        <span className="saveContact manageContactLeft" onClick={this.addContact}>
+        <span className="saveContact" onClick={this.addContact}>
           Save
         </span>
-        <span className="cancelUpdating manageContactRight" onClick={this.closeForm}>
+        <span className="cancelUpdating" onClick={this.closeForm}>
           Cancel
         </span>
       </div>
@@ -36,6 +38,7 @@ var Form = React.createClass({
   handleInput(e) {
     this.setState({
       [e.target.name]: e.target.value,
+      error: 0,
     });
   },
   addContact(e) {
@@ -46,7 +49,11 @@ var Form = React.createClass({
         name: '',
         phone: '',
         address: '',
-      })
+      });
+    } else {
+      this.setState({
+        error: 1,
+      });
     }
   },
   handleSaveKeyDown(e) {

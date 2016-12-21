@@ -4,8 +4,9 @@
           box-sizing: border-box;
 }
 
-.contactName {
-  font-size: 25px;
+h2 {
+  font-family: 'Patua One', cursive;
+  color: #34495E;
 }
 
 .row {
@@ -33,7 +34,6 @@
   background-color: #D6DBDF;
 }
 
-
 .contact:nth-of-type(even){
   background: #EBEDEF;
 }
@@ -41,7 +41,6 @@
 .contact:nth-of-type(odd){
   background: #F4F6F6;
 }
-
 
 .removeContact {
   font-size: 14px;
@@ -60,26 +59,7 @@
   border-color: #AEB6BF;
   background-color: #EBEDEF;
   color: #34495E;
-}
-
-.orderByName {
-    vertical-align: top;
-    width: 137px;
-    height: 26px;
-    border: 2px solid #AEB6BF;
-    font-size: 16px;
-    text-align: center;
-    display: inline-block;
-    vertical-align: top;
-    color: #34495E;
-    background-color: #AEB6BF;
-    font-weight: bold;
-    float: right;
-    transition: background-color 0.5s;
-}
-.orderByName:hover {
-  cursor: pointer;
-  background-color: #D6DBDF;
+  padding-left: 2px;
 }
 
 .contact {
@@ -93,23 +73,32 @@
   font-size: 14px;
   transition: color 0.5s;
 }
+
 .editContact:hover {
-    cursor: pointer;
-    color: #45795E;
+  cursor: pointer;
+  color: #45795E;
 }
 
 .saveContact {
   float: right;
+  color: #34495E;
   font-size: 14px;
+}
+
+.saveContact:hover {
+  cursor: pointer;
 }
 
 .cancelUpdating {
   float: left;
+  color: #34495E;
   font-size: 14px;
 }
 
-.error
-{
+.cancelUpdating:hover {
+  cursor: pointer;
+}
+.error {
   background-color: #F2D7D5;
 }
 

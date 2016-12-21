@@ -25,7 +25,7 @@ var Contact = React.createClass({
     });
   },
   render() {
-    var error = this.state.error ? ' error' : '';
+    var classValue = this.state.error ? ' error col-sm-12' : 'col-sm-12';
     if(!this.state.mode) {
         return <div className={'row contact ' + this.props.className}>
           <div className="col-sm-3">
@@ -47,19 +47,19 @@ var Contact = React.createClass({
     } else {
       return <div  className='row contact'>
         <div className="col-sm-3">
-          <input className={'col-sm-12' + error} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.name} name='name' autoFocus={true}></input>
+          <input className={classValue} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.name} name='name' autoFocus={true}></input>
         </div>
         <div className="col-sm-2">
-          <input className={'col-sm-12' + error} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.phone} name='phone'></input>
+          <input className={classValue} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.phone} name='phone'></input>
         </div>
         <div className="col-sm-5">
-          <input className={'col-sm-12' + error} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.address} name='address'></input>
+          <input className={classValue} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.address} name='address'></input>
         </div>
         <div className="col-sm-2 actionsColumn">
           <span className="saveContact" onClick={this.updateContact.bind(this, this.props.id)}>
             Save
           </span>
-          <span className="cancelUpdating" onClick={this.cancelEditing}>
+          <span className="cancelUpdating text-muted" onClick={this.cancelEditing}>
             Cancel
           </span>
         </div>

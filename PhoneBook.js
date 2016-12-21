@@ -18,6 +18,7 @@ var PhoneBook = React.createClass({
     };
   },
   render() {
+    console.log(this.state);
     var allContacts = this.state.contacts;
     var searchQuery = this.state.search.trim().toLowerCase();
     if(searchQuery.length > 0 ) {
@@ -28,7 +29,7 @@ var PhoneBook = React.createClass({
     }
 
     allContacts = allContacts.map(function(element, index) {
-      var addedContact = this.state.justAdded && index === 0 ? 'addedContact' : '';
+      var addedContact = this.state.justAdded && index === allContacts.length - 1 ? 'addedContact' : '';
       return <Contact
         key={index}
         name={element.name}
@@ -40,15 +41,16 @@ var PhoneBook = React.createClass({
         className = {addedContact}
       />;
     }.bind(this));
+    console.log(allContacts);
     return <div>
       <div className="addNewContact" onClick={this.handleShowForm}>Add New</div>
-      <input className='searchInput' type='text' value={this.state.search} onChange={this.handleSearch}></input>
-      <div className='allContacts'>
+      <input className="searchInput" type='text' value={this.state.search} onChange={this.handleSearch} placeholder="Search contacts"></input>
+      <div className="allContacts">
         <div className="row headers">
-          <Header sortType={this.getSortType('name')} className="col-sm-3" title='Name' onClick={this.handleHeaderClick.bind(this, 'name')}/>
+          <Header sortType={this.getSortType('name')} className="col-sm-3" title="Name" onClick={this.handleHeaderClick.bind(this, 'name')}/>
           <Header className="col-sm-2 noSort" title='Phone'/>
-          <Header sortType={this.getSortType('address')} className="col-sm-5" title='Address' onClick={this.handleHeaderClick.bind(this, 'address')} />
-          <Header className="col-sm-2 noSort" title='Actions'/>
+          <Header sortType={this.getSortType('address')} className="col-sm-5" title="Address" onClick={this.handleHeaderClick.bind(this, 'address')} />
+          <Header className="col-sm-2 noSort" title="Actions"/>
         </div>
         {this.state.showForm ? <Form addContact={this.addContact} closeForm={this.closeForm} /> : null}
         {allContacts}
@@ -78,10 +80,6 @@ var PhoneBook = React.createClass({
         sortType = 'asc';
       }
     }
-    this.setState({
-      sortingColumn: column,
-      sortType: sortType,
-    });
     var sortedContacts = this.state.contacts.slice();
     sortedContacts.sort(function(a,b) {
       var result = 0;
@@ -94,6 +92,8 @@ var PhoneBook = React.createClass({
     });
     this.setState({
       contacts: sortedContacts,
+      sortingColumn: column,
+      sortType: sortType,
     });
   },
   handleShowForm() {
@@ -120,7 +120,7 @@ var PhoneBook = React.createClass({
   },
   addContact(name, phone, address) {
     var newContactList = this.state.contacts.slice();
-    newContactList.unshift({name: name, phone_number: phone, address: address});
+    newContactList.push({name: name, phone_number: phone, address: address});
     this.setState({
       contacts: newContactList,
       showForm: false,
