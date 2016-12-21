@@ -26,21 +26,35 @@ var Contact = React.createClass({
   render() {
     var error = this.state.error ? ' error' : '';
     if(!this.state.mode) {
-        return <div  className='row contact'>
-          <div className="col-sm-3">{this.props.name}</div>
-          <div className="col-sm-2">{this.props.phone}</div>
-          <div className="col-sm-5">{this.props.address}</div>
-          <div className="col-sm-1">
-            <span className="removeContact glyphicon glyphicon-trash" onClick={this.removeContact.bind(this, this.props.id)}></span>
-            <span className="editContact glyphicon glyphicon-pencil" onClick={this.changeModeToEdit}></span>
+        return <div className='row contact'>
+          <div className="col-sm-3">
+            <div className="col-sm-12">{this.props.name}</div>
+          </div>
+          <div className="col-sm-2">
+            <div className="col-sm-12">{this.props.phone}</div>
+          </div>
+          <div className="col-sm-5">
+            <div className="col-sm-12">{this.props.address}</div>
+          </div>
+          <div className="col-sm-2 actionsColumn">
+            <div className="col-sm-12">
+              <span className="removeContact glyphicon glyphicon-trash" onClick={this.removeContact.bind(this, this.props.id)}></span>
+              <span className="editContact glyphicon glyphicon-pencil" onClick={this.changeModeToEdit}></span>
+            </div>
           </div>
         </div>
     } else {
       return <div  className='row contact'>
-        <input className={'col-sm-3' + error} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.name} name='name' autoFocus={true}></input>
-        <input className={'col-sm-2' + error} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.phone} name='phone'></input>
-        <input className={'col-sm-5' + error} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.address} name='address'></input>
+        <div className="col-sm-3">
+          <input className={'col-sm-12' + error} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.name} name='name' autoFocus={true}></input>
+        </div>
         <div className="col-sm-2">
+          <input className={'col-sm-12' + error} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.phone} name='phone'></input>
+        </div>
+        <div className="col-sm-5">
+          <input className={'col-sm-12' + error} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.address} name='address'></input>
+        </div>
+        <div className="col-sm-2 actionsColumn">
           <span className="saveContact manageContactLeft" onClick={this.updateContact.bind(this, this.props.id)}>
             Save
           </span>

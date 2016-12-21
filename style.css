@@ -8,13 +8,18 @@
   font-size: 25px;
 }
 
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .addNewContact {
-    width: 104px;
+    width: 98px;
     height: 26px;
     border: 2px solid #AEB6BF;
     font-size: 16px;
     text-align: center;
-    margin: 0 20px 20px 20px;
+    margin: 0 20px 20px 0px;
     display: inline-block;
     vertical-align: top;
     color: #34495E;
@@ -78,6 +83,7 @@
 .contact {
   font-size: 16px;
   padding: 2px;
+  padding-top: 3px;
 }
 
 .editContact {
@@ -121,6 +127,16 @@ input {
     color: #34495E;
 }
 
+.header:hover {
+  cursor: pointer;
+}
+.actionHeader:hover {
+  cursor: default;
+}
+
+.headers {
+  background-color: #AEB6BF;
+}
 
 .addNewContactForm {
   opacity: 0;
@@ -152,3 +168,9 @@ input {
   to {
     opacity: 1
   }
+}
+
+.icon {
+  font-size: 15px;
+  opacity: 0.6;
+}

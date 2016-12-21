@@ -13,9 +13,15 @@ var Header = React.createClass({
     } else if(this.props.sortType === 'desc') {
       sortClass = 'glyphicon glyphicon-sort-by-attributes-alt';
     }
-    return <div className={this.props.className + ' header'} onClick={this.props.onClick}>
-      {this.props.title}
-      <span className={sortClass + ' icon'}></span>
+    return <div className={this.props.className} onClick={this.props.onClick}>
+      <div className="col-sm-12">
+        <div className='header'>
+        {this.props.title + ' '}
+        </div>
+        <span className='icon'>
+          <span className={sortClass}></span>
+        </span>
+      </div>
     </div>
   },
 })

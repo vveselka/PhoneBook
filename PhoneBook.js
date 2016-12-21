@@ -44,7 +44,7 @@ var PhoneBook = React.createClass({
           <Header sortType={this.getSortType('name')} className="col-sm-3" title='Name' onClick={this.handleHeaderClick.bind(this, 'name')}/>
           <Header sortType={this.getSortType('phone')} className="col-sm-2" title='Phone' onClick={this.handleHeaderClick.bind(this, 'phone')}/>
           <Header sortType={this.getSortType('address')} className="col-sm-5" title='Address' onClick={this.handleHeaderClick.bind(this, 'address')} />
-          <Header className="col-sm-2" title='Actions'/>
+          <Header className="col-sm-2 actionHeader" title='Actions'/>
         </div>
         {this.state.showForm ? <Form addContact={this.addContact} closeForm={this.closeForm} /> : null}
         {allContacts}
