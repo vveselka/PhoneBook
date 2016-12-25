@@ -18,7 +18,6 @@ var PhoneBook = React.createClass({
     };
   },
   render() {
-    console.log(this.state);
     var allContacts = this.state.contacts;
     var searchQuery = this.state.search.trim().toLowerCase();
     if(searchQuery.length > 0 ) {
@@ -29,7 +28,7 @@ var PhoneBook = React.createClass({
     }
 
     allContacts = allContacts.map(function(element, index) {
-      var addedContact = this.state.justAdded && index === allContacts.length - 1 ? 'addedContact' : '';
+      var addedContact = this.state.justAdded && index === 0 ? 'addedContact' : '';
       return <Contact
         key={index}
         name={element.name}
@@ -41,7 +40,6 @@ var PhoneBook = React.createClass({
         className = {addedContact}
       />;
     }.bind(this));
-    console.log(allContacts);
     return <div>
       <div className="addNewContact" onClick={this.handleShowForm}>Add New</div>
       <input className="searchInput" type='text' value={this.state.search} onChange={this.handleSearch} placeholder="Search contacts"></input>
@@ -83,9 +81,9 @@ var PhoneBook = React.createClass({
     var sortedContacts = this.state.contacts.slice();
     sortedContacts.sort(function(a,b) {
       var result = 0;
-      if (a[column] > b[column]) {
+      if (a[column].toLowerCase() > b[column].toLowerCase()) {
         result = 1;
-      } else if(a[column] < b[column]) {
+      } else if(a[column].toLowerCase() < b[column].toLowerCase()) {
         result = -1;
       }
       return sortType === 'asc' ? result : -result;
@@ -120,7 +118,7 @@ var PhoneBook = React.createClass({
   },
   addContact(name, phone, address) {
     var newContactList = this.state.contacts.slice();
-    newContactList.push({name: name, phone_number: phone, address: address});
+    newContactList.unshift({name: name, phone_number: phone, address: address});
     this.setState({
       contacts: newContactList,
       showForm: false,

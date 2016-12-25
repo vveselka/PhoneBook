@@ -14,9 +14,9 @@ var Header = React.createClass({
       sortClass = 'glyphicon glyphicon-sort-by-attributes-alt';
     }
     var noSort = this.props.className.includes('noSort') ? 'noSort': '';
-    return <div className={this.props.className} onClick={this.props.onClick}>
+    return <div className={this.props.className} >
       <div className="col-sm-12">
-        <div className={'header '+ noSort}>
+        <div className={'header '+ noSort} onClick={this.props.onClick}>
         {this.props.title + ' '}
         </div>
         <span className='icon'>

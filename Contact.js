@@ -19,9 +19,12 @@ var Contact = React.createClass({
       error: 0,
     }
   },
-  componentWillReceiveProps() {
+  componentWillReceiveProps(newProps) {
     this.setState({
       mode: 0,
+      name: newProps.name,
+      phone: newProps.phone,
+      address: newProps.address,
     });
   },
   render() {
