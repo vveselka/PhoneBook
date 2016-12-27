@@ -1,12 +1,11 @@
 {
   "name": "hack",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "simple phone book",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "./node_modules/webpack/bin/webpack.js"
   },
-  "author": "",
+  "author": "Victoria Yaremenko",
   "license": "ISC",
   "dependencies": {
     "babel-core": "^6.21.0",
