@@ -1,4 +1,5 @@
 var React = require('react');
+var ContactAsForm = require('./ContactAsForm');
 
 var Contact = React.createClass({
   propTypes: {
@@ -48,25 +49,7 @@ var Contact = React.createClass({
           </div>
         </div>
     } else {
-      return <div  className='row contact'>
-        <div className="col-sm-3">
-          <input className={classValue} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.name} name='name' autoFocus={true}></input>
-        </div>
-        <div className="col-sm-2">
-          <input className={classValue} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.phone} name='phone'></input>
-        </div>
-        <div className="col-sm-5">
-          <input className={classValue} onChange={this.handleInput} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.address} name='address'></input>
-        </div>
-        <div className="col-sm-2 actionsColumn">
-          <span className="saveContact" onClick={this.updateContact.bind(this, this.props.id)}>
-            Save
-          </span>
-          <span className="cancelUpdating text-muted" onClick={this.cancelEditing}>
-            Cancel
-          </span>
-        </div>
-      </div>
+      return <ContactAsForm name={this.props.name} phone={this.props.phone} address={this.props.address} id={this.props.id} onSave={this.updateContact} onCancel={this.cancelEditing} />
     }
   },
   removeContact(id) {
@@ -77,23 +60,11 @@ var Contact = React.createClass({
       mode: 1,
     })
   },
-  handleInput(e) {
+  updateContact(name, phone, address, id) {
+    this.props.updateContact(id, name, phone, address);
     this.setState({
-      [e.target.name]: e.target.value,
-      error: 0,
-    });
-  },
-  updateContact(id) {
-    if(this.state.name !== '' && this.state.phone !== '' && this.state.address !== '') {
-      this.props.updateContact(id, this.state.name, this.state.phone, this.state.address);
-      this.setState({
-        mode: 0,
-      });
-    } else {
-      this.setState({
-        error: 1,
-      })
-    }
+      mode: 0,
+    })
   },
   cancelEditing() {
     this.setState({
@@ -104,10 +75,6 @@ var Contact = React.createClass({
         error: 0,
     });
   },
-  handleUpdKeyDown(id, e) {
-    if(e.keyCode !== 13) return;
-    else this.updateContact(id)
-  }
 });
 
 
