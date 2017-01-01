@@ -14,9 +14,6 @@ var Form = React.createClass({
       onSave={this.props.addContact}
       onCancel={this.props.closeForm} />;
   },
-  addContact(name, phone, address) {
-    this.props.addContact(name.trim(), phone.trim(), address.trim());
-  },
 });
 
 module.exports = Form;

@@ -43,7 +43,8 @@ var Contact = React.createClass({
           </div>
           <div className="col-sm-2 actionsColumn">
             <div className="col-sm-12">
-              <span className="removeContact glyphicon glyphicon-trash" onClick={this.removeContact.bind(this, this.props.id)}></span>
+
+              <span className="removeContact glyphicon glyphicon-trash" onClick={this.props.removeContact.bind(null, this.props.id)}></span>
               <span className="editContact glyphicon glyphicon-pencil" onClick={this.changeModeToEdit}></span>
             </div>
           </div>
@@ -51,9 +52,6 @@ var Contact = React.createClass({
     } else {
       return <ContactAsForm name={this.props.name} phone={this.props.phone} address={this.props.address} id={this.props.id} onSave={this.updateContact} onCancel={this.cancelEditing} />
     }
-  },
-  removeContact(id) {
-    this.props.removeContact(id);
   },
   changeModeToEdit() {
     this.setState({
@@ -76,6 +74,5 @@ var Contact = React.createClass({
     });
   },
 });
-
 
 module.exports = Contact;

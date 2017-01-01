@@ -2,12 +2,12 @@ var React = require('react');
 
 var ContactAsForm = React.createClass({
   propTypes: {
-    name: React.PropTypes.string,
-    phone: React.PropTypes.string,
-    address: React.PropTypes.string,
+    name: React.PropTypes.string.isRequired,
+    phone: React.PropTypes.string.isRequired,
+    address: React.PropTypes.string.isRequired,
     id: React.PropTypes.number,
-    onCancel: React.PropTypes.func,
-    onSave: React.PropTypes.func,
+    onCancel: React.PropTypes.func.isRequired,
+    onSave: React.PropTypes.func.isRequired,
   },
   getInitialState() {
     return {
@@ -16,9 +16,6 @@ var ContactAsForm = React.createClass({
       address: this.props.address,
       error: 0,
     }
-
-  },
-  componentWillReceiveProps(newProps) {
 
   },
   render: function() {
