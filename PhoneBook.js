@@ -95,9 +95,7 @@ var PhoneBook = React.createClass({
     });
   },
   handleShowForm() {
-    this.setState({
-      showForm: true,
-    })
+    this.setState({showForm: true})
   },
   removeContact(index) {
     var newContactList = this.state.contacts.slice();
@@ -127,14 +125,10 @@ var PhoneBook = React.createClass({
     });
   },
   handleSearch(e) {
-    this.setState({
-      search: e.target.value,
-    });
+    this.setState({search: e.target.value});
   },
   closeForm() {
-    this.setState({
-      showForm: false,
-    })
+    this.setState({showForm: false})
   }
 });
 

@@ -178,3 +178,48 @@ input {
 .addedContact {
     animation: newItemAnimation 3s;
 }
+
+.modalContent {
+  font-size: 28px;
+  color: #777;
+  padding-bottom: 30px;
+}
+
+.modalButton {
+  border: 1px solid #777;
+  color: #777;
+  font-weight: bold;
+  width: 58px;
+  margin-left: 5px;
+  text-align: center;
+  display: inline-block;
+}
+
+.modalButton:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.modalStyle {
+    position: absolute;
+    top: 200px;
+    left: 650px;
+    border: 1px solid #777;
+    background: #fff;
+    overflow: auto;
+    WebkitOverflowScrolling: touch;
+    borderRadius: 4px;
+    outline: none;
+    padding: 20px;
+    width: 450px;
+    height: 200px;
+}
+
+.overlayModalStyle {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+}

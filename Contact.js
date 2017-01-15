@@ -1,5 +1,6 @@
 var React = require('react');
 var ContactAsForm = require('./ContactAsForm');
+var ReactModal = require('react-modal');
 
 var Contact = React.createClass({
   propTypes: {
@@ -18,6 +19,7 @@ var Contact = React.createClass({
       phone: this.props.phone,
       address: this.props.address,
       error: 0,
+      showModal: false,
     }
   },
   componentWillReceiveProps(newProps) {
@@ -43,8 +45,16 @@ var Contact = React.createClass({
           </div>
           <div className="col-sm-2 actionsColumn">
             <div className="col-sm-12">
-
-              <span className="removeContact glyphicon glyphicon-trash" onClick={this.props.removeContact.bind(null, this.props.id)}></span>
+              <span className="removeContact glyphicon glyphicon-trash" onClick={this.handleOpenModal}></span>
+              <ReactModal
+                isOpen={this.state.showModal}
+                contentLabel="Modal"
+                className="modalStyle"
+                overlayClassName="overlayModalStyle">
+                  <div className="modalContent">Do you really want to remove '{this.props.name}' contact?</div>
+                  <div className="modalButton" onClick={this.handleModalCancel}>No</div>
+                  <div className="modalButton" onClick={this.handleModalRemove}>Yes</div>
+              </ReactModal>
               <span className="editContact glyphicon glyphicon-pencil" onClick={this.changeModeToEdit}></span>
             </div>
           </div>
@@ -53,16 +63,23 @@ var Contact = React.createClass({
       return <ContactAsForm name={this.props.name} phone={this.props.phone} address={this.props.address} id={this.props.id} onSave={this.updateContact} onCancel={this.cancelEditing} />
     }
   },
+  handleOpenModal() {
+    this.setState({showModal: true});
+  },
+
+  handleModalCancel() {
+    this.setState({showModal: false});
+  },
+  handleModalRemove() {
+    this.props.removeContact(this.props.id);
+    this.setState({showModal: false});
+  },
   changeModeToEdit() {
-    this.setState({
-      mode: 1,
-    })
+    this.setState({mode: 1})
   },
   updateContact(name, phone, address, id) {
     this.props.updateContact(id, name, phone, address);
-    this.setState({
-      mode: 0,
-    })
+    this.setState({mode: 0})
   },
   cancelEditing() {
     this.setState({
