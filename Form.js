@@ -1,11 +1,7 @@
-var React = require('react');
-var ContactAsForm = require('./ContactAsForm');
+import React from 'react';
+import ContactAsForm from './ContactAsForm';
 
-var Form = React.createClass({
-  propTypes: {
-    addContact: React.PropTypes.func.isRequired,
-    closeForm: React.PropTypes.func.isRequired,
-  },
+export default class Form extends React.Component {
   render() {
     return <ContactAsForm
       name={""}
@@ -13,7 +9,10 @@ var Form = React.createClass({
       address={''}
       onSave={this.props.addContact}
       onCancel={this.props.closeForm} />;
-  },
-});
+  }
+};
 
-module.exports = Form;
+Form.propTypes = {
+  addContact: React.PropTypes.func.isRequired,
+  closeForm: React.PropTypes.func.isRequired,
+}

@@ -1,19 +1,11 @@
-var React = require('react');
-var ContactAsForm = require('./ContactAsForm');
-var ReactModal = require('react-modal');
+import React from 'react';
+import ContactAsForm from './ContactAsForm';
+import ReactModal from 'react-modal';
 
-var Contact = React.createClass({
-  propTypes: {
-    name: React.PropTypes.string.isRequired,
-    phone: React.PropTypes.string.isRequired,
-    address: React.PropTypes.string.isRequired,
-    id: React.PropTypes.number.isRequired,
-    removeContact: React.PropTypes.func.isRequired,
-    updateContact: React.PropTypes.func.isRequired,
-    className: React.PropTypes.string,
-  },
-  getInitialState() {
-    return {
+export default class Contact extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       mode: 0,
       name: this.props.name,
       phone: this.props.phone,
@@ -21,7 +13,8 @@ var Contact = React.createClass({
       error: 0,
       showModal: false,
     }
-  },
+  }
+
   componentWillReceiveProps(newProps) {
     this.setState({
       mode: 0,
@@ -29,9 +22,10 @@ var Contact = React.createClass({
       phone: newProps.phone,
       address: newProps.address,
     });
-  },
+  }
+
   render() {
-    var classValue = this.state.error ? ' error col-sm-12' : 'col-sm-12';
+    const classValue = this.state.error ? ' error col-sm-12' : 'col-sm-12';
     if(!this.state.mode) {
         return <div className={'row contact ' + this.props.className}>
           <div className="col-sm-3">
@@ -45,42 +39,42 @@ var Contact = React.createClass({
           </div>
           <div className="col-sm-2 actionsColumn">
             <div className="col-sm-12">
-              <span className="removeContact glyphicon glyphicon-trash" onClick={this.handleOpenModal}></span>
+              <span className="removeContact glyphicon glyphicon-trash" onClick={() => this.setState({showModal: true})}></span>
               <ReactModal
                 isOpen={this.state.showModal}
                 contentLabel="Modal"
                 className="modalStyle"
                 overlayClassName="overlayModalStyle">
                   <div className="modalContent">Do you really want to remove '{this.props.name}' contact?</div>
-                  <div className="modalButton" onClick={this.handleModalCancel}>No</div>
-                  <div className="modalButton" onClick={this.handleModalRemove}>Yes</div>
+                  <div className="modalButton" onClick={() => this.setState({showModal: false})}>No</div>
+                  <div className="modalButton" onClick={this.handleModalRemove.bind(this)}>Yes</div>
               </ReactModal>
-              <span className="editContact glyphicon glyphicon-pencil" onClick={this.changeModeToEdit}></span>
+              <span className="editContact glyphicon glyphicon-pencil" onClick={() => this.setState({mode: 1})}></span>
             </div>
           </div>
         </div>
     } else {
-      return <ContactAsForm name={this.props.name} phone={this.props.phone} address={this.props.address} id={this.props.id} onSave={this.updateContact} onCancel={this.cancelEditing} />
+      return <ContactAsForm
+        name={this.props.name}
+        phone={this.props.phone}
+        address={this.props.address}
+        id={this.props.id}
+        onSave={this.updateContact.bind(this)}
+        onCancel={this.cancelEditing.bind(this)}
+        />
     }
-  },
-  handleOpenModal() {
-    this.setState({showModal: true});
-  },
+  }
 
-  handleModalCancel() {
-    this.setState({showModal: false});
-  },
   handleModalRemove() {
     this.props.removeContact(this.props.id);
     this.setState({showModal: false});
-  },
-  changeModeToEdit() {
-    this.setState({mode: 1})
-  },
+  }
+
   updateContact(name, phone, address, id) {
     this.props.updateContact(id, name, phone, address);
     this.setState({mode: 0})
-  },
+  }
+
   cancelEditing() {
     this.setState({
         mode: 0,
@@ -89,7 +83,15 @@ var Contact = React.createClass({
         address: this.props.address,
         error: 0,
     });
-  },
-});
+  }
+}
 
-module.exports = Contact;
+Contact.propTypes = {
+    name: React.PropTypes.string.isRequired,
+    phone: React.PropTypes.string.isRequired,
+    address: React.PropTypes.string.isRequired,
+    id: React.PropTypes.number.isRequired,
+    removeContact: React.PropTypes.func.isRequired,
+    updateContact: React.PropTypes.func.isRequired,
+    className: React.PropTypes.string,
+}

@@ -3,7 +3,6 @@ import Contact from './Contact';
 import Form from './Form';
 import Header from './Header';
 
-
 export default class PhoneBook extends React.Component {
   constructor(props) {
     super(props);
@@ -139,7 +138,6 @@ export default class PhoneBook extends React.Component {
     this.setState({showForm: false})
   }
 }
-
 
 PhoneBook.propTypes = {
   contacts: React.PropTypes.array.isRequired,
