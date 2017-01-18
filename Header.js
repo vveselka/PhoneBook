@@ -1,19 +1,14 @@
-var React = require('react');
-var Header = React.createClass({
-  propTypes:{
-    title: React.PropTypes.string.isRequired,
-    className: React.PropTypes.string.isRequired,
-    sortType: React.PropTypes.string, // none, asc, desc
-    onClick: React.PropTypes.func,
-  },
+import React, {Component, PropTypes} from 'react';
+
+export default class Header extends  React.Component {
   render() {
-    var sortClass;
+    let sortClass;
     if(this.props.sortType === 'asc') {
       sortClass = 'glyphicon glyphicon-sort-by-attributes';
     } else if(this.props.sortType === 'desc') {
       sortClass = 'glyphicon glyphicon-sort-by-attributes-alt';
     }
-    var noSort = this.props.className.includes('noSort') ? 'noSort': '';
+    const noSort = this.props.className.includes('noSort') ? 'noSort': '';
     return <div className={this.props.className} >
       <div className="col-sm-12">
         <div className={'header '+ noSort} onClick={this.props.onClick}>
@@ -24,7 +19,12 @@ var Header = React.createClass({
         </span>
       </div>
     </div>
-  },
-})
+  }
+}
 
-module.exports = Header;
+Header.propTypes = {
+  title: React.PropTypes.string.isRequired,
+  className: React.PropTypes.string.isRequired,
+  sortType: React.PropTypes.string, // none, asc, desc
+  onClick: React.PropTypes.func,
+}
