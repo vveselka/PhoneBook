@@ -1,10 +1,9 @@
 module.exports = {
-    entry: __dirname + "/app.js",
+    entry: __dirname + "/src/app.js",
     output: {
       path: __dirname,
-      filename: "bundle.js"
+      filename: "/build/bundle.js"
     },
-    
     module: {
       loaders: [{
         test: /\.js$/,
