@@ -1,6 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 
-export default class Header extends  React.Component {
+export default class Header extends React.Component {
+  static propTypes = {
+    title: React.PropTypes.string.isRequired,
+    className: React.PropTypes.string.isRequired,
+    sortType: React.PropTypes.string, // none, asc, desc
+    onClick: React.PropTypes.func,
+  }
+  
   render() {
     let sortClass;
     if(this.props.sortType === 'asc') {
@@ -20,11 +27,4 @@ export default class Header extends  React.Component {
       </div>
     </div>
   }
-}
-
-Header.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  className: React.PropTypes.string.isRequired,
-  sortType: React.PropTypes.string, // none, asc, desc
-  onClick: React.PropTypes.func,
 }

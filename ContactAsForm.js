@@ -11,6 +11,15 @@ export default class ContactAsForm extends React.Component{
     }
   }
 
+  static propTypes = {
+    name: React.PropTypes.string.isRequired,
+    phone: React.PropTypes.string.isRequired,
+    address: React.PropTypes.string.isRequired,
+    id: React.PropTypes.number,
+    onCancel: React.PropTypes.func.isRequired,
+    onSave: React.PropTypes.func.isRequired,
+  }
+
   render() {
     const classValue = this.state.error ? ' error col-sm-12' : 'col-sm-12';
     return <div className='row contact'>
@@ -18,13 +27,13 @@ export default class ContactAsForm extends React.Component{
         <input className={classValue} onChange={(e) => this.handleInput(e)} onKeyDown={(e) => this.handleUpdKeyDown(this.props.id, e)} value={this.state.name ? this.state.name: '' } name='name' autoFocus={true}></input>
       </div>
       <div className="col-sm-2">
-        <input className={classValue} onChange={(e) => this.handleInput(e)} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.phone} name='phone'></input>
+        <input className={classValue} onChange={(e) => this.handleInput(e)} onKeyDown={(e) => this.handleUpdKeyDown(this.props.id, e)} value={this.state.phone} name='phone'></input>
       </div>
       <div className="col-sm-5">
-        <input className={classValue} onChange={(e) => this.handleInput(e)} onKeyDown={this.handleUpdKeyDown.bind(this, this.props.id)} value={this.state.address} name='address'></input>
+        <input className={classValue} onChange={(e) => this.handleInput(e)} onKeyDown={(e) => this.handleUpdKeyDown(this.props.id, e)} value={this.state.address} name='address'></input>
       </div>
       <div className="col-sm-2 actionsColumn">
-        <span className="saveContact" onClick={this.save.bind(this, this.props.id)}>
+        <span className="saveContact" onClick={() => this.save(this.props.id)}>
           Save
         </span>
         <span className="cancelUpdating text-muted" onClick={this.props.onCancel}>
@@ -55,13 +64,4 @@ export default class ContactAsForm extends React.Component{
       error: 0,
     });
   }
-}
-
-ContactAsForm.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  phone: React.PropTypes.string.isRequired,
-  address: React.PropTypes.string.isRequired,
-  id: React.PropTypes.number,
-  onCancel: React.PropTypes.func.isRequired,
-  onSave: React.PropTypes.func.isRequired,
 }

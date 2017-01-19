@@ -16,6 +16,10 @@ export default class PhoneBook extends React.Component {
     }
   }
 
+  static propTypes = {
+    contacts: React.PropTypes.array.isRequired
+  }
+
   render() {
     let allContacts = this.state.contacts;
     const searchQuery = this.state.search.trim().toLowerCase();
@@ -25,7 +29,7 @@ export default class PhoneBook extends React.Component {
       });
     }
 
-    allContacts = allContacts.map(function(element, index) {
+    allContacts = allContacts.map((element, index) => {
       const cssEffect = this.state.justAdded && index === 0 ? 'addedContact' : '';
       return <Contact
         key={index}
@@ -37,7 +41,8 @@ export default class PhoneBook extends React.Component {
         updateContact={this.updateContact.bind(this)}
         className = {cssEffect}
       />;
-    }.bind(this));
+    });
+
     return <div>
       <div className="addNewContact" onClick={(e) => this.handleShowForm(e)}>Add New</div>
       <input className="searchInput" type='text' value={this.state.search} onChange={(e) => this.handleSearch(e)} placeholder="Search contacts"></input>
@@ -48,7 +53,7 @@ export default class PhoneBook extends React.Component {
           <Header sortType={this.getSortType('address')} className="col-sm-5" title="Address" onClick={(e) => this.handleHeaderClick('address')} />
           <Header className="col-sm-2 noSort" title="Actions"/>
         </div>
-        {this.state.showForm ? <Form addContact={this.addContact.bind(this)} closeForm={this.closeForm} /> : null}
+        {this.state.showForm ? <Form addContact={(name, phone, address) => this.addContact(name, phone, address)} closeForm={() => this.closeForm()} /> : null}
         {allContacts}
       </div>
     </div>;
@@ -56,9 +61,7 @@ export default class PhoneBook extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if(this.state.justAdded) {
-      setTimeout(function() {
-        this.setState({justAdded: false});
-      }.bind(this), 3000);
+      setTimeout(() => this.setState({justAdded: false}), 3000);
     }
   }
 
@@ -80,7 +83,8 @@ export default class PhoneBook extends React.Component {
       }
     }
     const sortedContacts = this.state.contacts.slice();
-    sortedContacts.sort(function(a,b) {
+
+    sortedContacts.sort((a, b) => {
       let result = 0;
       if (a[column].toLowerCase() > b[column].toLowerCase()) {
         result = 1;
@@ -89,6 +93,7 @@ export default class PhoneBook extends React.Component {
       }
       return sortType === 'asc' ? result : -result;
     });
+
     this.setState({
       contacts: sortedContacts,
       sortingColumn: column,
@@ -137,8 +142,4 @@ export default class PhoneBook extends React.Component {
   closeForm() {
     this.setState({showForm: false})
   }
-}
-
-PhoneBook.propTypes = {
-  contacts: React.PropTypes.array.isRequired,
 }
