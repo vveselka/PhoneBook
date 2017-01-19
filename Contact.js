@@ -6,11 +6,10 @@ export default class Contact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: 0,
       name: this.props.name,
       phone: this.props.phone,
       address: this.props.address,
-      error: 0,
+      mode: 0,
       showModal: false,
     }
   }
@@ -27,16 +26,15 @@ export default class Contact extends React.Component {
 
   componentWillReceiveProps(newProps) {
     this.setState({
-      mode: 0,
       name: newProps.name,
       phone: newProps.phone,
       address: newProps.address,
+      mode: 0,
     });
   }
 
   render() {
-    const classValue = this.state.error ? ' error col-sm-12' : 'col-sm-12';
-    if(!this.state.mode) {
+    if (!this.state.mode) {
       return <div className={'row contact ' + this.props.className}>
         <div className="col-sm-3">
           <div className="col-sm-12">{this.props.name}</div>
@@ -49,7 +47,10 @@ export default class Contact extends React.Component {
         </div>
         <div className="col-sm-2 actionsColumn">
           <div className="col-sm-12">
-            <span className="removeContact glyphicon glyphicon-trash" onClick={() => this.setState({showModal: true})}></span>
+            <span
+              className="removeContact glyphicon glyphicon-trash"
+              onClick={() => this.setState({showModal: true})}
+            />
             <ReactModal
               isOpen={this.state.showModal}
               contentLabel="Modal"
@@ -59,7 +60,10 @@ export default class Contact extends React.Component {
                 <div className="modalButton" onClick={() => this.setState({showModal: false})}>No</div>
                 <div className="modalButton" onClick={() => this.handleModalRemove()}>Yes</div>
             </ReactModal>
-            <span className="editContact glyphicon glyphicon-pencil" onClick={() => this.setState({mode: 1})}></span>
+            <span
+              className="editContact glyphicon glyphicon-pencil"
+              onClick={() => this.setState({mode: 1})}
+            />
           </div>
         </div>
       </div>
@@ -69,7 +73,7 @@ export default class Contact extends React.Component {
         phone={this.props.phone}
         address={this.props.address}
         id={this.props.id}
-        onSave={(name, phone, address, id) => this.updateContact(name, phone, address, id)}
+        onSave={this.updateContact.bind(this)}
         onCancel={() =>  this.cancelEditing()}
         />
     }
@@ -87,11 +91,10 @@ export default class Contact extends React.Component {
 
   cancelEditing() {
     this.setState({
-      mode: 0,
       name: this.props.name,
       phone: this.props.phone,
       address: this.props.address,
-      error: 0,
+      mode: 0,
     });
   }
 }

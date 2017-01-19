@@ -12,6 +12,7 @@ export default class Form extends React.Component {
       phone=""
       address=""
       onSave={this.props.addContact}
-      onCancel={this.props.closeForm} />;
+      onCancel={this.props.closeForm}
+    />;
   }
 };

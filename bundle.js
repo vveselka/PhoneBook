@@ -60,15 +60,26 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	$.ajax({
-	  url: 'http://www.mocky.io/v2/581335f71000004204abaf83',
-	  type: 'get',
-	  dataType: 'jsonp'
-	}).done(function (data) {
-	  return _reactDom2.default.render(_react2.default.createElement(_PhoneBook2.default, { contacts: data.contacts }), document.getElementById('app'));
-	}).fail(function (data) {
-	  return console.log('Error ' + data.status);
-	});
+	var contacts = [{
+	  name: 'Oleta Level',
+	  phone_number: '+442032960159',
+	  address: '10 London Wall, London EC2M 6SA, UK'
+	}, {
+	  name: 'Lia Pigford',
+	  phone_number: '+44203296018223',
+	  address: 'Westmorland Cl, Darwen BB3 2TQ, UK'
+	}, {
+	  name: 'Adan Milian',
+	  phone_number: '+44203296001120',
+	  address: 'Ellerbeck Rd, Darwen BB3 3EX, UK'
+	}];
+
+	var contactsForPhoneBook = void 0;
+	if (JSON.parse(localStorage.getItem('contacts')) === null) {
+	  contactsForPhoneBook = localStorage.setItem('contacts', JSON.stringify(contacts));
+	} else contactsForPhoneBook = JSON.parse(localStorage.getItem('contacts'));
+
+	_reactDom2.default.render(_react2.default.createElement(_PhoneBook2.default, { contacts: contactsForPhoneBook }), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21609,9 +21620,7 @@
 	            _react2.default.createElement(_Header2.default, { className: 'col-sm-2 noSort', title: 'Actions' })
 	          ),
 	          this.state.showForm ? _react2.default.createElement(_Form2.default, {
-	            addContact: function addContact(name, phone, address) {
-	              return _this2.addContact(name, phone, address);
-	            },
+	            addContact: this.addContact.bind(this),
 	            closeForm: function closeForm() {
 	              return _this2.closeForm();
 	            }
@@ -21679,6 +21688,7 @@
 	    value: function removeContact(index) {
 	      var newContactList = this.state.contacts.slice();
 	      newContactList.splice(index, 1);
+	      localStorage.setItem('contacts', JSON.stringify(newContactList));
 	      this.setState({
 	        contacts: newContactList
 	      });
@@ -21687,6 +21697,7 @@
 	    key: 'updateContact',
 	    value: function updateContact(id, name, phone, address) {
 	      var newContactList = this.state.contacts.slice();
+	      localStorage.setItem('contacts', JSON.stringify(newContactList));
 	      newContactList[id].name = name;
 	      newContactList[id].phone_number = phone;
 	      newContactList[id].address = address;
@@ -21700,6 +21711,7 @@
 	    value: function addContact(name, phone, address) {
 	      var newContactList = this.state.contacts.slice();
 	      newContactList.unshift({ name: name, phone_number: phone, address: address });
+	      localStorage.setItem('contacts', JSON.stringify(newContactList));
 	      this.setState({
 	        contacts: newContactList,
 	        showForm: false,
@@ -21880,9 +21892,7 @@
 	          phone: this.props.phone,
 	          address: this.props.address,
 	          id: this.props.id,
-	          onSave: function onSave(name, phone, address, id) {
-	            return _this2.updateContact(name, phone, address, id);
-	          },
+	          onSave: this.updateContact.bind(this),
 	          onCancel: function onCancel() {
 	            return _this2.cancelEditing();
 	          }

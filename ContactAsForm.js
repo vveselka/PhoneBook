@@ -22,15 +22,34 @@ export default class ContactAsForm extends React.Component{
 
   render() {
     const classValue = this.state.error ? ' error col-sm-12' : 'col-sm-12';
-    return <div className='row contact'>
+    return <div className="row contact">
       <div className="col-sm-3">
-        <input className={classValue} onChange={(e) => this.handleInput(e)} onKeyDown={(e) => this.handleUpdKeyDown(this.props.id, e)} value={this.state.name ? this.state.name: '' } name='name' autoFocus={true}></input>
+        <input
+          className={classValue}
+          onChange={(e) => this.handleInput(e)}
+          onKeyDown={(e) => this.handleUpdKeyDown(this.props.id, e)}
+          value={this.state.name ? this.state.name: '' }
+          name="name"
+          autoFocus={true}
+        />
       </div>
       <div className="col-sm-2">
-        <input className={classValue} onChange={(e) => this.handleInput(e)} onKeyDown={(e) => this.handleUpdKeyDown(this.props.id, e)} value={this.state.phone} name='phone'></input>
+        <input
+          className={classValue}
+          onChange={(e) => this.handleInput(e)}
+          onKeyDown={(e) => this.handleUpdKeyDown(this.props.id, e)}
+          value={this.state.phone}
+          name="phone"
+        />
       </div>
       <div className="col-sm-5">
-        <input className={classValue} onChange={(e) => this.handleInput(e)} onKeyDown={(e) => this.handleUpdKeyDown(this.props.id, e)} value={this.state.address} name='address'></input>
+        <input
+          className={classValue}
+          onChange={(e) => this.handleInput(e)}
+          onKeyDown={(e) => this.handleUpdKeyDown(this.props.id, e)}
+          value={this.state.address}
+          name="address"
+        />
       </div>
       <div className="col-sm-2 actionsColumn">
         <span className="saveContact" onClick={() => this.save(this.props.id)}>
@@ -44,7 +63,9 @@ export default class ContactAsForm extends React.Component{
   }
 
   save(id) {
-    if(this.state.name.trim() !== '' && this.state.phone.trim() !== '' && this.state.address.trim() !== '') {
+    if (this.state.name.trim() !== ''
+      && this.state.phone.trim() !== ''
+      && this.state.address.trim() !== '') {
       this.props.onSave(this.state.name, this.state.phone, this.state.address, id);
     } else {
       this.setState({
@@ -54,7 +75,7 @@ export default class ContactAsForm extends React.Component{
   }
 
   handleUpdKeyDown(id, e) {
-    if(e.keyCode !== 13) return;
+    if (e.keyCode !== 13) return;
     else this.save(id);
   }
 

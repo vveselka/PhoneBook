@@ -7,21 +7,21 @@ export default class Header extends React.Component {
     sortType: React.PropTypes.string, // none, asc, desc
     onClick: React.PropTypes.func,
   }
-  
+
   render() {
     let sortClass;
-    if(this.props.sortType === 'asc') {
+    if (this.props.sortType === 'asc') {
       sortClass = 'glyphicon glyphicon-sort-by-attributes';
-    } else if(this.props.sortType === 'desc') {
+    } else if (this.props.sortType === 'desc') {
       sortClass = 'glyphicon glyphicon-sort-by-attributes-alt';
     }
     const noSort = this.props.className.includes('noSort') ? 'noSort': '';
     return <div className={this.props.className} >
       <div className="col-sm-12">
-        <div className={'header '+ noSort} onClick={this.props.onClick}>
+        <div className={"header "+ noSort} onClick={this.props.onClick}>
         {this.props.title + ' '}
         </div>
-        <span className='icon'>
+        <span className="icon">
           <span className={sortClass}></span>
         </span>
       </div>

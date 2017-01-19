@@ -23,9 +23,11 @@ export default class PhoneBook extends React.Component {
   render() {
     let allContacts = this.state.contacts;
     const searchQuery = this.state.search.trim().toLowerCase();
-    if(searchQuery.length > 0 ) {
+    if (searchQuery.length > 0 ) {
       allContacts = allContacts.filter(function(el) {
-          return el.name.toLowerCase().includes(searchQuery) || el.phone_number.toLowerCase().includes(searchQuery) || el.address.toLowerCase().includes(searchQuery) ;
+          return el.name.toLowerCase().includes(searchQuery)
+            || el.phone_number.toLowerCase().includes(searchQuery)
+            || el.address.toLowerCase().includes(searchQuery) ;
       });
     }
 
@@ -45,22 +47,43 @@ export default class PhoneBook extends React.Component {
 
     return <div>
       <div className="addNewContact" onClick={(e) => this.handleShowForm(e)}>Add New</div>
-      <input className="searchInput" type='text' value={this.state.search} onChange={(e) => this.handleSearch(e)} placeholder="Search contacts"></input>
+      <input
+        className="searchInput"
+        type="text"
+        value={this.state.search}
+        onChange={(e) => this.handleSearch(e)}
+        placeholder="Search contacts"
+      />
+
       <div className="allContacts">
         <div className="row headers">
-          <Header sortType={this.getSortType('name')} className="col-sm-3" title="Name" onClick={(e) => this.handleHeaderClick('name')}/>
-          <Header className="col-sm-2 noSort" title='Phone'/>
-          <Header sortType={this.getSortType('address')} className="col-sm-5" title="Address" onClick={(e) => this.handleHeaderClick('address')} />
+          <Header
+            sortType={this.getSortType('name')}
+            className="col-sm-3" title="Name"
+            onClick={(e) => this.handleHeaderClick('name')}
+          />
+          <Header className="col-sm-2 noSort" title="Phone"/>
+          <Header
+            sortType={this.getSortType('address')}
+            className="col-sm-5"
+            title="Address"
+            onClick={(e) => this.handleHeaderClick('address')}
+          />
           <Header className="col-sm-2 noSort" title="Actions"/>
         </div>
-        {this.state.showForm ? <Form addContact={(name, phone, address) => this.addContact(name, phone, address)} closeForm={() => this.closeForm()} /> : null}
+        {this.state.showForm
+          ? <Form
+              addContact={this.addContact.bind(this)}
+              closeForm={() => this.closeForm()}
+            />
+          : null}
         {allContacts}
       </div>
     </div>;
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(this.state.justAdded) {
+    if (this.state.justAdded) {
       setTimeout(() => this.setState({justAdded: false}), 3000);
     }
   }
@@ -74,11 +97,11 @@ export default class PhoneBook extends React.Component {
     if (this.state.sortingColumn !== column) {
       sortType = 'asc';
     } else {
-      if(this.state.sortType === 'none') {
+      if (this.state.sortType === 'none') {
         sortType = 'asc';
-      } else if(this.state.sortType === 'asc') {
+      } else if (this.state.sortType === 'asc') {
         sortType = 'desc';
-      } else if(this.state.sortType === 'desc') {
+      } else if (this.state.sortType === 'desc') {
         sortType = 'asc';
       }
     }
@@ -96,8 +119,8 @@ export default class PhoneBook extends React.Component {
 
     this.setState({
       contacts: sortedContacts,
-      sortingColumn: column,
       sortType: sortType,
+      sortingColumn: column,
     });
   }
 
@@ -108,6 +131,7 @@ export default class PhoneBook extends React.Component {
   removeContact(index) {
     const newContactList = this.state.contacts.slice();
     newContactList.splice(index, 1);
+    localStorage.setItem('contacts', JSON.stringify(newContactList));
     this.setState({
       contacts: newContactList,
     });
@@ -115,6 +139,7 @@ export default class PhoneBook extends React.Component {
 
   updateContact(id, name, phone, address) {
     const newContactList = this.state.contacts.slice();
+    localStorage.setItem('contacts', JSON.stringify(newContactList));
     newContactList[id].name = name;
     newContactList[id].phone_number = phone;
     newContactList[id].address = address;
@@ -127,12 +152,14 @@ export default class PhoneBook extends React.Component {
   addContact(name, phone, address) {
     const newContactList = this.state.contacts.slice();
     newContactList.unshift({name: name, phone_number: phone, address: address});
+    localStorage.setItem('contacts', JSON.stringify(newContactList));
     this.setState({
       contacts: newContactList,
       showForm: false,
       sortType: 'none',
       justAdded: true,
     });
+
   }
 
   handleSearch(e) {
