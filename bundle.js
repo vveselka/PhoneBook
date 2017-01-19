@@ -76,7 +76,8 @@
 
 	var contactsForPhoneBook = void 0;
 	if (JSON.parse(localStorage.getItem('contacts')) === null) {
-	  contactsForPhoneBook = localStorage.setItem('contacts', JSON.stringify(contacts));
+	  localStorage.setItem('contacts', JSON.stringify(contacts));
+	  contactsForPhoneBook = contacts;
 	} else contactsForPhoneBook = JSON.parse(localStorage.getItem('contacts'));
 
 	_reactDom2.default.render(_react2.default.createElement(_PhoneBook2.default, { contacts: contactsForPhoneBook }), document.getElementById('app'));

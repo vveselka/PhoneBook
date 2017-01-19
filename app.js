@@ -22,7 +22,8 @@ let contacts = [
 
 let contactsForPhoneBook;
 if (JSON.parse(localStorage.getItem('contacts')) === null) {
-  contactsForPhoneBook = localStorage.setItem('contacts', JSON.stringify(contacts));
+  localStorage.setItem('contacts', JSON.stringify(contacts));
+  contactsForPhoneBook = contacts;
 } else contactsForPhoneBook = JSON.parse(localStorage.getItem('contacts'));
 
 ReactDOM.render(<PhoneBook contacts={contactsForPhoneBook} />,
