@@ -132,38 +132,6 @@ input {
   background-color: #AEB6BF;
 }
 
-.addNewContactForm {
-  opacity: 0;
-}
-
-.addNewContactForm.fade {
-  -webkit-animation: fade 5s;
-  animation: fade 2s;
-  opacity: 1;
-  padding: 5px 0 10px 0;
-  background-color: #EBEDEF;
-}
-
-@-webkit-keyframes fade {
-    from {
-      opacity: 0;
-      background-color: white;
-    }
-    to {
-      opacity: 1;
-      background-color: #777;
-    }
-}
-
-@keyframes fade {
-  from {
-    opacity: 0
-  }
-  to {
-    opacity: 1
-  }
-}
-
 .icon {
   font-size: 15px;
   opacity: 0.6;
@@ -171,12 +139,21 @@ input {
 
 
 @keyframes newItemAnimation {
-  0% {  background-color: #45795E; }
+  0% {  background-color: #88C1AA; }
+  100% { background-color: #EBEDEF; }
+}
+
+@keyframes removedItemAnimation {
+  0% {  background-color: #E6B0AA; }
   100% { background-color: #EBEDEF; }
 }
 
 .addedContact {
     animation: newItemAnimation 3s;
+}
+
+.removedContact {
+  animation: removedItemAnimation 2s;
 }
 
 .modalContent {

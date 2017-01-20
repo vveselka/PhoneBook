@@ -21786,7 +21786,8 @@
 	      phone: _this.props.phone,
 	      address: _this.props.address,
 	      mode: 0,
-	      showModal: false
+	      showModal: false,
+	      justRemovedElement: false
 	    };
 	    return _this;
 	  }
@@ -21798,7 +21799,8 @@
 	        name: newProps.name,
 	        phone: newProps.phone,
 	        address: newProps.address,
-	        mode: 0
+	        mode: 0,
+	        justRemovedElement: false
 	      });
 	    }
 	  }, {
@@ -21807,9 +21809,10 @@
 	      var _this2 = this;
 
 	      if (!this.state.mode) {
+	        var classForRemovedElement = this.state.justRemovedElement ? 'removedContact ' : '';
 	        return _react2.default.createElement(
 	          'div',
-	          { className: 'row contact ' + this.props.className },
+	          { className: 'row contact ' + this.props.className + classForRemovedElement },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'col-sm-3' },
@@ -21903,8 +21906,15 @@
 	  }, {
 	    key: 'handleModalRemove',
 	    value: function handleModalRemove() {
-	      this.props.removeContact(this.props.id);
-	      this.setState({ showModal: false });
+	      var _this3 = this;
+
+	      this.setState({
+	        justRemovedElement: true,
+	        showModal: false
+	      });
+	      setTimeout(function () {
+	        return _this3.props.removeContact(_this3.props.id);
+	      }, 500);
 	    }
 	  }, {
 	    key: 'updateContact',
